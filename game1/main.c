@@ -1,15 +1,42 @@
 #include <raylib.h>
 
 int main(void) {
-    InitWindow(800, 600, "Hello Raylib!");
+    // make a window
+    InitWindow(1000 ,600 , "hello");
+    // vector for the postion of the rectangle
+    Vector2 pos = {450,270};
+   // int recW = 100;
+    //int recH = 60;
 
-    while (!WindowShouldClose()) {
+    SetTargetFPS(120);
+
+    // the main loop
+    while (!WindowShouldClose())
+    {
+        //event handling
+        if(IsKeyDown(KEY_RIGHT)){pos.x = pos.x + 1;}
+        if(IsKeyDown(KEY_UP)){pos.y = pos.y - 1;}
+        if(IsKeyDown(KEY_LEFT)){pos.x = pos.x - 1;}
+        if(IsKeyDown(KEY_DOWN)){pos.y = pos.y + 1;}
+
+
+        //update position
+        //if the position of the x axis is == 1000 start form the beginning
+        if (pos.x > GetScreenWidth()){pos.x = 0;}
+        else if(pos.x < 0){pos.x = 1000;}
+        else if(pos.y > 600){pos.y = 0;}
+        else if(pos.y < 0){pos.y = 600;}
+        
+        
+
+        //Drawing Objects
+
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText("It works!", 350, 280, 20, BLUE);
+        DrawRectangle(pos.x ,pos.y, 100,60,RED);
         EndDrawing();
+        
     }
-
-    CloseWindow();
-    return 0;
+    
+   return 0;
 }
